@@ -128,12 +128,8 @@ function update(req, res) {
 function destroy(req, res, next) {
   const orderId = res.locals.order.id;
   const index = orders.findIndex(order => order.id === orderId);
-
-  if (index > -1) {
-    orders.splice(index, 1);
-    res.sendStatus(204);
-  }
-  next({ status: 404, message: `Order id not found: ${orderId}` });
+  const deletedOrder = orders.splice(index, 1);
+  res.sendStatus(204);
 }
 
 module.exports = {
